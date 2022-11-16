@@ -7,5 +7,7 @@ public class StringMisal {
 		System.out.println(name);
 		System.out.println(name2);
 		System.out.println(name3);
+		int i=name.length();
+		System.out.println(i);
 	}
 }
