@@ -16,12 +16,13 @@ public class PrimitiveTypeConversionHome {
 		double e = 373.56D;
 		int e1 = (int) e;
 		System.out.println(e1);
-		char simvol='A';
-		int kodu=(int)simvol;
+		char simvol = 'A';
+		int kodu = (int) simvol;
 		System.out.println(kodu);
-		int f=78;
-		char h=(char)f;
+		int f = 78;
+		char h = (char) f;
 		System.out.println(h);
+
 	}
 
 }
