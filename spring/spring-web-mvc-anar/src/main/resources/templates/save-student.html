@@ -14,11 +14,17 @@
 </head>
 
 <body>
-	<h1>Ana sehife</h1>
-	<p style="background: grey; color: white">Telebe qeydiyyat sehifesi</p>
-	<a class="btn btn-primary" th:href="@{/students}">Telebe siyahisi</a>
-	<hr>
-<a class="btn btn-primary" th:href="@{/students/open-save-page}">Telebe qeydiyyati</a>
+
+	<form th:action="@{/students/save}" th:object=${student} method="post"></form>
+
+	<p>Telebe adi</p>
+	<input th:field="*{name}">
+
+	<p>Telebe soyadi</p>
+	<input th:field="*{surname}">
+	
+	<input type="submit" value="Yadda saxla">
+
 
 </body>
 </html>

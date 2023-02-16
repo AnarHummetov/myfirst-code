@@ -33,6 +33,10 @@ public class Student {
 		this.phone = phone;
 	}
 
+	public Student() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getSurname() {
 		return surname;
 	}
