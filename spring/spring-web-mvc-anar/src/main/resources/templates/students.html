@@ -16,11 +16,13 @@
 <body>
 	<h1>Telebe siyahisi</h1>
 	<a class="btn btn-primary" th:href="@{/}">Ana sehife</a>
+	<hr>
 	<form th:action="@{/students}">
 	<input name="q">
 	<input type="submit" value="Axtar">
 	</form>
-	<table class="table">
+	<hr>
+	<table class="table table-bordered table-dark">
 		<thead>
 			<tr>
 				<th>Kod</th>

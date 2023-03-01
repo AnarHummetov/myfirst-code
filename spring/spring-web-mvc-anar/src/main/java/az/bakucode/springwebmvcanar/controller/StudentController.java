@@ -26,7 +26,9 @@ public class StudentController {
 
 		ArrayList<Student> filteredStudents = new ArrayList<>();
 		for (Student s : studentService.findAll()) {
-			if (s.getName().contains(query)) {
+			String name = s.getName();
+			name = name == null ? "" : name;
+			if (name.contains(query)) {
 				filteredStudents.add(s);
 			}
 		}
@@ -44,8 +46,6 @@ public class StudentController {
 
 	@PostMapping(path = "/save")
 	public String save(@ModelAttribute Student student) {
-		int id = studentService.findAll().size() + 1;
-		student.setId(id);
 		studentService.add(student);
 		return "redirect:/students";
 	}

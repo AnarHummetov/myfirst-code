@@ -23,7 +23,7 @@ public class StudentRepository {
 		try {
 			Connection conn = dataSource.getConnection();
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from student");
+			ResultSet rs = st.executeQuery("select * from students");
 			while (rs.next()) {
 
 				Student s = new Student(rs.getInt("id"), rs.getString("name"), rs.getString("surname"),
@@ -37,4 +37,17 @@ public class StudentRepository {
 		return students;
 	}
 
+	public void add(Student s) {
+		try {
+			Connection conn = dataSource.getConnection();
+			Statement st = conn.createStatement();
+			st.executeUpdate("insert into students (name,surname,email,phone)" + "value ('" + s.getName() + "','"
+					+ s.getSurname() + "','" + s.getEmail() + "','" + s.getPhone() + "');");
+
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 }

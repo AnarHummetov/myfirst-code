@@ -17,14 +17,19 @@
 
 	<form th:action="@{/students/save}" th:object=${student} method="post">
 
-	<p>Telebe adi</p>
-	<input th:field="*{name}">
+		<p>Telebe adi</p>
+		<input th:field="*{name}">
 
-	<p>Telebe soyadi</p>
-	<input th:field="*{surname}">
-	
-	<input type="submit" value="Yadda saxla">
+		<p>Telebe soyadi</p>
+		<input th:field="*{surname}">
 
-</form>
+		<p>Telebe emaili</p>
+		<input th:field="*{email}">
+
+		<p>Telebe telefonu</p>
+		<input th:field="*{phone}"> <br> <input type="submit"
+			value="Yadda saxla">
+
+	</form>
 </body>
 </html>
