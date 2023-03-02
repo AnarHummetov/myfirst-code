@@ -21,4 +21,14 @@ public class StudentService {
 	public void add(Student s) {
 		studentRepository.add(s);
 	}
+
+	public void deleteById(Integer id) {
+		studentRepository.deleteById(id);
+		
+	}
+
+	public Student findById(Integer id) {
+		
+		return studentRepository.findById(id);
+	}
 }

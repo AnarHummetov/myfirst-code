@@ -18,11 +18,10 @@
 	<a class="btn btn-primary" th:href="@{/}">Ana sehife</a>
 	<hr>
 	<form th:action="@{/students}">
-	<input name="q">
-	<input type="submit" value="Axtar">
+		<input name="q"> <input type="submit" value="Axtar">
 	</form>
 	<hr>
-	<table class="table table-bordered table-dark">
+	<table class="table table-bordered table-striped table-dark">
 		<thead>
 			<tr>
 				<th>Kod</th>
@@ -30,6 +29,8 @@
 				<th>Soyad</th>
 				<th>Email</th>
 				<th>Telefon</th>
+				<th>Emeliyyatlar</th>
+
 			</tr>
 		</thead>
 		<tbody>
@@ -39,6 +40,10 @@
 				<td th:text="${s.surname}"></td>
 				<td th:text="${s.email}"></td>
 				<td th:text="${s.phone}"></td>
+				<td><a class="btn btn-danger"
+					th:href="@{/students/delete/{id}(id=${s.id})}">Sil</a>
+				<a class="btn btn-warning"
+					th:href="@{/students/edit/{id}(id=${s.id})}">Redakte et</a></td>
 			</tr>
 
 		</tbody>

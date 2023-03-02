@@ -41,13 +41,52 @@ public class StudentRepository {
 		try {
 			Connection conn = dataSource.getConnection();
 			Statement st = conn.createStatement();
-			st.executeUpdate("insert into students (name,surname,email,phone)" + "value ('" + s.getName() + "','"
-					+ s.getSurname() + "','" + s.getEmail() + "','" + s.getPhone() + "');");
+			if (s.getId() == null) {
+				st.executeUpdate("insert into students (name,surname,email,phone)" + "value ('" + s.getName() + "','"
+						+ s.getSurname() + "','" + s.getEmail() + "','" + s.getPhone() + "');");
+
+			} else {
+				st.executeUpdate("update students set name='" + s.getName() + "',surname='" + s.getSurname()
+						+ "',email='" + s.getEmail() + "',phone='" + s.getPhone() + "' " + " where id=" + s.getId());
+
+			}
 
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void deleteById(Integer id) {
+
+		try {
+			Connection conn = dataSource.getConnection();
+			Statement st = conn.createStatement();
+			st.executeUpdate("delete from students where id=" + id);
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public Student findById(Integer id) {
+		Student s = null;
+		try {
+			Connection conn = dataSource.getConnection();
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("select * from students where id=" + id);
+			if (rs.next()) {
+
+				s = new Student(rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getString("email"),
+						rs.getString("phone"));
+
+			}
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return s;
 	}
 }
