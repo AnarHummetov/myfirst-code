@@ -42,8 +42,8 @@ public class StudentRepository {
 			Connection conn = dataSource.getConnection();
 			Statement st = conn.createStatement();
 			if (s.getId() == null) {
-				st.executeUpdate("insert into students (name,surname,email,phone)" + "value ('" + s.getName() + "','"
-						+ s.getSurname() + "','" + s.getEmail() + "','" + s.getPhone() + "');");
+				st.executeUpdate("insert into students(name,surname,email,phone) "
+						+ "values('"+s.getName()+"','"+s.getSurname()+"','"+s.getEmail()+"','"+s.getPhone()+"')");
 
 			} else {
 				st.executeUpdate("update students set name='" + s.getName() + "',surname='" + s.getSurname()
@@ -54,7 +54,7 @@ public class StudentRepository {
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 
 	}
 
