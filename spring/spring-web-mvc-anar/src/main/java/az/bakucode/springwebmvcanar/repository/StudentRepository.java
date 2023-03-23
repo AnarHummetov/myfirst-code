@@ -27,7 +27,7 @@ public class StudentRepository {
 			while (rs.next()) {
 
 				Student s = new Student(rs.getInt("id"), rs.getString("name"), rs.getString("surname"),
-						rs.getString("email"), rs.getString("phone"));
+						rs.getString("email"), rs.getString("phone"), rs.getDate("birthday"), rs.getString("sector"));
 				students.add(s);
 			}
 			conn.close();
@@ -42,12 +42,12 @@ public class StudentRepository {
 			Connection conn = dataSource.getConnection();
 			Statement st = conn.createStatement();
 			if (s.getId() == null) {
-				st.executeUpdate("insert into students(name,surname,email,phone) "
-						+ "values('"+s.getName()+"','"+s.getSurname()+"','"+s.getEmail()+"','"+s.getPhone()+"')");
+				st.executeUpdate("insert into students(name,surname,email,phone,birthday,sector) "
+						+ "values('"+s.getName()+"','"+s.getSurname()+"','"+s.getEmail()+"','"+s.getPhone()+"','"+s.getBirthday().toLocalDate()+"','"+s.getSector()+"')");
 
 			} else {
 				st.executeUpdate("update students set name='" + s.getName() + "',surname='" + s.getSurname()
-						+ "',email='" + s.getEmail() + "',phone='" + s.getPhone() + "' " + " where id=" + s.getId());
+						+ "',email='" + s.getEmail() + "',phone='" + s.getPhone() + "', birthday='"+s.getBirthday().toLocalDate()+"', sector='"+s.getSector()+"' " + " where id=" + s.getId());
 
 			}
 
@@ -80,7 +80,7 @@ public class StudentRepository {
 			if (rs.next()) {
 
 				s = new Student(rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getString("email"),
-						rs.getString("phone"));
+						rs.getString("phone"), rs.getDate("birthday"), rs.getString("sector"));
 
 			}
 			conn.close();

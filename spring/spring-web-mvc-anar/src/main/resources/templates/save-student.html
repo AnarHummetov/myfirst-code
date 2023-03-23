@@ -1,5 +1,6 @@
 <html xmlns:th="www.thymleaf.org">
 <head>
+<title th:text=${header}></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -14,6 +15,7 @@
 </head>
 
 <body>
+<h1 th:text=${header}></h1>
 
 	<form th:action="@{/students/save}" th:object=${student} method="post">
 
@@ -29,7 +31,19 @@
 		<input th:field="*{email}">
 
 		<p>Telebe telefonu</p>
-		<input th:field="*{phone}"> <br> <input type="submit"
+		<input th:field="*{phone}"> 
+		
+		<p>Telebe tevelludu</p>
+		<input th:field="*{birthday}" type="date">
+		
+		<p>Telebe sektoru</p>
+		<select th:field="*{sector}">
+		<option>Az</option>
+		<option>Rus</option>
+		<option>Ingilis</option>
+		</select>
+		
+		<br> <input type="submit"
 			value="Yadda saxla">
 
 	</form>

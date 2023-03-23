@@ -40,6 +40,7 @@ public class StudentController {
 	@GetMapping(path = "/open-save-page")
 	public String openSavePage(Model model) {
 		Student s = new Student();
+		model.addAttribute("header","Yeni telebe qeydi");
 		model.addAttribute("student", s);
 		return "save-student";
 
@@ -63,6 +64,7 @@ public class StudentController {
 		if (s==null) {
 			return "not-found";
 		}
+		model.addAttribute("header","Telebe redaktesi ");
 		model.addAttribute("student", s);
 		return "save-student";
 	}
