@@ -13,6 +13,7 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -25,6 +26,15 @@ public class Book {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Book(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	public Book() {
+		
+	}
+	
 	
 	
 }
