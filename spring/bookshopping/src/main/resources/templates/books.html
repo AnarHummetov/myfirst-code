@@ -49,8 +49,11 @@ td:hover {
 			<tr>
 				<th>Id</th>
 				<th>Ad</th>
-				<th>Tesvir</th>
-				<th>Qiymet</th>
+				<th>Təsvir</th>
+				<th>Qiymət</th>
+				<th>Müəllif</th>
+				<th>Səhifə sayı</th>
+				<th>Şəkil</th>
 			</tr>
 
 
@@ -62,6 +65,9 @@ td:hover {
 				<td th:text="${b.name}"></td>
 				<td th:text="${b.description}"></td>
 				<td th:text="${b.price}"></td>
+				<td th:text="${b.author}"></td>
+				<td th:text="${b.pageCount}"></td>
+				<td th:text="${b.image}"></td>
 			</tr>
 
 		</tbody>
