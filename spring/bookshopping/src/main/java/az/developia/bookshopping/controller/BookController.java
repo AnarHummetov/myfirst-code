@@ -55,8 +55,22 @@ public class BookController {
 	List<Book> books = bookDao.findAll();
 	model.addAttribute("books", books);
 		
-		System.out.println(id);
 		return "redirect:/books";
+
+	}
+	
+	@GetMapping(path = "/books/edit/{id}")
+	public String editBook(@PathVariable(name ="id")Integer id, Model model ) {
+	boolean bookExists = bookDao.findById(id).isPresent();
+	Book book=null;
+	if (bookExists) {
+		book=bookDao.findById(id).get();
+	}else {
+		
+	}
+	model.addAttribute("book", book);
+		
+		return "new-book";
 
 	}
 }
