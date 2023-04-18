@@ -1,6 +1,7 @@
 package az.developia.bookshopping.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,10 +62,11 @@ public class BookController {
 	
 	@GetMapping(path = "/books/edit/{id}")
 	public String editBook(@PathVariable(name ="id")Integer id, Model model ) {
-	boolean bookExists = bookDao.findById(id).isPresent();
-	Book book=null;
+	Optional<Book> bookOptional=bookDao.findById(id);
+		boolean bookExists = bookOptional.isPresent();
+	Book book=new Book();
 	if (bookExists) {
-		book=bookDao.findById(id).get();
+		book=bookOptional.get();
 	}else {
 		
 	}

@@ -10,6 +10,10 @@
 	<h1 style="text-align:center; ">Yeni kitab</h1>
 
 	<form th:action="@{/books/new-book-process}" method="POST" th:object="${book}" id="book-register-form">
+	<div class="form-group">
+	<input type="hidden" class="form-control" id="book-id" th:field="*{id}"/></div>
+	
+	
 	<div class="form-group"><label for="book-name">Ad:</label>
 	<input class="form-control" id="book-name" th:field="*{name}"/></div>
 	
