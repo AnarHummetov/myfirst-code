@@ -14,13 +14,19 @@ import az.developia.bookshopping.model.Book;
 public class BookController {
 	@Autowired
 	private BookDao bookDao;
-	
-	@GetMapping(path="/books")
+
+	@GetMapping(path = "/books")
 	public String showBooks(Model model) {
-		List<Book> books =bookDao.findAll();
+		List<Book> books = bookDao.findAll();
 		model.addAttribute("books", books);
 		return "books";
-		
+
 	}
 
+	@GetMapping(path = "/books/new")
+	public String openNewBookPage() {
+
+		return "new-book";
+
+	}
 }

@@ -7,13 +7,16 @@ table,th,td{border: 1px solid black;}
 table{border-collapse: collapse; width: 60%;}
 th{padding:4px; background-color: olive;}
 td{background-color: silver;}
-td:hover {color:aqua; ; cursor: pointer; 
+td:hover {color:aqua; ; cursor: pointer;}
+#new-book-button{display: block;background-color:rgb(132, 178, 114);width: 150px;text-align:center;border-radius:2px; text-decoration: none; }
+#new-book-button:hover {background-color:rgb(132, 168, 114);cursor: pointer;
 	
 }
-
 </style>
 </head>
 <body>
+<a th:href="@{/books/new}" id="new-book-button">Yeni kitab</a>
+<hr>
 <table>
 <thead>
 <tr>
