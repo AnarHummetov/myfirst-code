@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import az.developia.bookshopping.dao.BookDao;
@@ -41,5 +42,21 @@ public class BookController {
 		List<Book> books = bookDao.findAll();
 		model.addAttribute("books", books);
 		return "books";
+	}
+	
+	@GetMapping(path = "/books/delete/{id}")
+	public String deleteBook(@PathVariable(name ="id")Integer id, Model model ) {
+	boolean bookExists = bookDao.findById(id).isPresent();
+	if (bookExists) {
+		bookDao.deleteById(id);
+	}else {
+		
+	}
+	List<Book> books = bookDao.findAll();
+	model.addAttribute("books", books);
+		
+		System.out.println(id);
+		return "redirect:/books";
+
 	}
 }
