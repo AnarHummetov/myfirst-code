@@ -7,7 +7,7 @@
 </head>
 <body>
 
-	<h1 style="text-align:center; ">Yeni kitab</h1>
+	<h1 th:text="${header}" style="text-align:center; color: green; ">Yeni kitab</h1>
 
 	<form th:action="@{/books/new-book-process}" method="POST" th:object="${book}" id="book-register-form">
 	<div class="form-group">
