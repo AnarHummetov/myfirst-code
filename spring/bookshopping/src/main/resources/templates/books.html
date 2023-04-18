@@ -3,38 +3,65 @@
 <head>
 <title>Books page</title>
 <style>
-table,th,td{border: 1px solid black;}
-table{border-collapse: collapse; width: 60%;}
-th{padding:4px; background-color: olive;}
-td{background-color: silver;}
-td:hover {color:aqua; ; cursor: pointer;}
-#new-book-button{display: block;background-color:rgb(132, 178, 114);width: 150px;text-align:center;border-radius:2px; text-decoration: none; }
-#new-book-button:hover {background-color:rgb(132, 168, 114);cursor: pointer;
-	
+table, th, td {
+	border: 1px solid black;
+}
+
+table {
+	border-collapse: collapse;
+	width: 60%;
+}
+
+th {
+	padding: 4px;
+	background-color: olive;
+}
+
+td {
+	background-color: silver;
+}
+
+td:hover {
+	color: aqua;;
+	cursor: pointer;
+}
+
+#new-book-button {
+	display: block;
+	background-color: rgb(132, 178, 114);
+	width: 150px;
+	text-align: center;
+	border-radius: 2px;
+	text-decoration: none;
+}
+
+#new-book-button:hover {
+	background-color: rgb(132, 168, 114);
+	cursor: pointer;
 }
 </style>
 </head>
 <body>
-<a th:href="@{/books/new}" id="new-book-button">Yeni kitab</a>
-<hr>
-<table>
-<thead>
-<tr>
-<th>Id</th>
-<th>Ad</th>
-</tr>
+	<a th:href="@{/books/new}" id="new-book-button">Yeni kitab</a>
+	<hr>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Ad</th>
+			</tr>
 
 
-</thead>
+		</thead>
 
-<tbody>
-<tr th:each="b : ${books}">
-<td th:text="${b.id}"></td>
-<td th:text="${b.name}"></td>
-</tr>
+		<tbody>
+			<tr th:each="b : ${books}">
+				<td th:text="${b.id}"></td>
+				<td th:text="${b.name}"></td>
+			</tr>
 
-</tbody>
-</table>
+		</tbody>
+	</table>
 
 </body>
 </html>
