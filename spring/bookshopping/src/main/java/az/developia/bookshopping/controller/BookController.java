@@ -43,7 +43,7 @@ public class BookController {
 		bookDao.save(book);
 		List<Book> books = bookDao.findAll();
 		model.addAttribute("books", books);
-		return "books";
+		return "redirect:/books";
 	}
 	
 	@GetMapping(path = "/books/delete/{id}")
