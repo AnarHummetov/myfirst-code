@@ -49,6 +49,7 @@ td:hover {
 			<tr>
 				<th>Id</th>
 				<th>Ad</th>
+				<th>Tesvir</th>
 			</tr>
 
 
@@ -58,6 +59,7 @@ td:hover {
 			<tr th:each="b : ${books}">
 				<td th:text="${b.id}"></td>
 				<td th:text="${b.name}"></td>
+				<td th:text="${b.description}"></td>
 			</tr>
 
 		</tbody>
