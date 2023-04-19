@@ -3,96 +3,67 @@
 <head>
 <meta charset="utf-8">
 <title>Books page</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-table, th, td {
-	border: 1px solid black;
-}
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-table {
-	border-collapse: collapse;
-	width: 60%;
-}
-
-th {
-	padding: 4px;
-	background-color: olive;
-}
-
-td {
-	background-color: silver;
-}
-
-td:hover {
-	color: aqua;;
-	cursor: pointer;
-}
-
-#new-book-button {
-	display: block;
-	background-color: rgb(132, 178, 114);
-	width: 150px;
-	text-align: center;
-	border-radius: 2px;
-	text-decoration: none;
-}
-
-#new-book-button:hover {
-	background-color: rgb(132, 168, 114);
-	cursor: pointer;
-}
-a{margin-right: 5px;}
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css"
-href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+	href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 
 <script type="text/javascript" charset="utf8"
-src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+	src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 
 <script>
-$(document).ready(function() {
-$('#books-table').DataTable();
-});
+	$(document).ready(function() {
+		$('#books-table').DataTable();
+	});
 </script>
 </head>
 <body>
-<div th:replace="menu :: menu"></div>
-	<a th:href="@{/books/new}" id="new-book-button">Yeni kitab</a>
-	<a th:href="@{/home}">Əsas səhifə</a>
-	<hr>
-	<table id="books-table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Ad</th>
-				<th>Təsvir</th>
-				<th>Qiymət</th>
-				<th>Müəllif</th>
-				<th>Səhifə sayı</th>
-				<th>Şəkil</th>
-				<th>Əməliyyatlar</th>
-			</tr>
+	<div th:replace="menu :: menu"></div>
+	<div class="container-fluid">
+		<a class="btn btn-success" th:href="@{/books/new}"
+			id="new-book-button">Yeni kitab</a> <a class="btn btn-primary table-striped"
+			th:href="@{/home}">Əsas səhifə</a>
+		<hr>
+		<table id="books-table" class="table table-hover table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Ad</th>
+					<th>Təsvir</th>
+					<th>Qiymət</th>
+					<th>Müəllif</th>
+					<th>Səhifə sayı</th>
+					<th>Şəkil</th>
+					<th>Əməliyyatlar</th>
+				</tr>
 
 
-		</thead>
+			</thead>
 
-		<tbody>
-			<tr th:each="b : ${books}">
-				<td th:text="${b.id}"></td>
-				<td th:text="${b.name}"></td>
-				<td th:text="${b.description}"></td>
-				<td th:text="${b.price}"></td>
-				<td th:text="${b.author}"></td>
-				<td th:text="${b.pageCount}"></td>
-				<td th:text="${b.image}"></td>
-				<td><a th:href="@{/books/delete/{id}(id=${b.id})}" class="btn btn-danger" th:onclick="if(!(confirm('Kitabı silməyə əminsiniz?'))) return false">Sil</a>
-				<a th:href="@{/books/edit/{id}(id=${b.id})}" class="btn btn-primary">Redaktə</a></td>
-			</tr>
+			<tbody>
+				<tr th:each="b : ${books}">
+					<td th:text="${b.id}"></td>
+					<td th:text="${b.name}"></td>
+					<td th:text="${b.description}"></td>
+					<td th:text="${b.price}"></td>
+					<td th:text="${b.author}"></td>
+					<td th:text="${b.pageCount}"></td>
+					<td th:text="${b.image}"></td>
+					<td><a th:href="@{/books/delete/{id}(id=${b.id})}"
+						class="btn btn-danger"
+						th:onclick="if(!(confirm('Kitabı silməyə əminsiniz?'))) return false">Sil</a>
+						<a th:href="@{/books/edit/{id}(id=${b.id})}"
+						class="btn btn-primary">Redaktə</a></td>
+				</tr>
 
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</div>
+
 
 </body>
 </html>
