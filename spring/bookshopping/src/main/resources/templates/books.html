@@ -85,7 +85,7 @@ $('#books-table').DataTable();
 				<td th:text="${b.author}"></td>
 				<td th:text="${b.pageCount}"></td>
 				<td th:text="${b.image}"></td>
-				<td><a th:href="@{/books/delete/{id}(id=${b.id})}" class="btn btn-danger">Sil</a>
+				<td><a th:href="@{/books/delete/{id}(id=${b.id})}" class="btn btn-danger" th:onclick="if(!(confirm('Kitabı silməyə əminsiniz?'))) return false">Sil</a>
 				<a th:href="@{/books/edit/{id}(id=${b.id})}" class="btn btn-primary">Redaktə</a></td>
 			</tr>
 
