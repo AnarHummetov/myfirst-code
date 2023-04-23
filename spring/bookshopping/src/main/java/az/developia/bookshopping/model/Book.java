@@ -1,12 +1,13 @@
 package az.developia.bookshopping.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
+
 public class Book {
 
 	@Id
@@ -38,10 +39,19 @@ public class Book {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Book(Integer id, String name) {
+
+	
+	public Book(Integer id, String name, String description, Double price, String author, Integer pageCount,
+			String image, String username) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.author = author;
+		this.pageCount = pageCount;
+		this.image = image;
+		this.username = username;
 	}
 	public Book() {
 		
