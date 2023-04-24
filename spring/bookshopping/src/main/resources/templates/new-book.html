@@ -35,6 +35,7 @@
 	</div>
 	<div class="form-group"><label for="book-page-count">Səhifə sayı:</label>
 	<input class="form-control" type="number" id="book-page-count" th:field="*{pageCount}"/>
+	<span class="error-message" th:if="${#fields.hasErrors('pageCount')}" th:errors="*{pageCount}"></span>
 	</div>
 	
 	<input class="btn btn-success" type="submit" value="Yadda saxla"/>

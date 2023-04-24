@@ -34,6 +34,8 @@ public class Book {
 	@Size(max = 30,message = "Maxsimum 30 simvol yazmaq lazımdır")
 	@Column(columnDefinition = "VARCHAR(30)")
 	private String author;
+	@Min(value = 0, message = "Minimum 0 yazmaq olar")
+	@Max(value = 10000,message = "Maxsimum 10000 yazmaq olar")
 	private Integer pageCount;
 	private String image;
 	private String username;
