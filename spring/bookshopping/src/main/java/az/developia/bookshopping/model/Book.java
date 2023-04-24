@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -24,6 +27,9 @@ public class Book {
 	@Size(max = 300,message = "Maxsimum 300 simvol yazmaq lazımdır")
 	@Column(columnDefinition = "VARCHAR(300)")
 	private String description;
+	@Min(value = 0, message = "Minimum 0 yazmaq olar")
+	@Max(value = 1000,message = "Maxsimum 1000 yazmaq olar")
+	@NotNull(message = "Qiyməti boş qoymaq olmaz")
 	private Double price;
 	private String author;
 	private Integer pageCount;
