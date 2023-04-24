@@ -31,6 +31,8 @@ public class Book {
 	@Max(value = 1000,message = "Maxsimum 1000 yazmaq olar")
 	@NotNull(message = "Qiyməti boş qoymaq olmaz")
 	private Double price;
+	@Size(max = 30,message = "Maxsimum 30 simvol yazmaq lazımdır")
+	@Column(columnDefinition = "VARCHAR(30)")
 	private String author;
 	private Integer pageCount;
 	private String image;
