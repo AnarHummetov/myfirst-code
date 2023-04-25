@@ -11,8 +11,8 @@
 </head>
 <body>
 	<div th:replace="menu :: menu"></div>
+	<h1 style="text-align: center;">Hesaba daxil olmaq</h1>
 	<div style="width: 300px;margin: auto;">
-		<h1>Kitab alış-verişi saytımıza xoş gəlmisiniz</h1>
 		<form th:action="@{/authenticate-user}" method="POST" class="form">
 		<div th:if="${param.error}" class="alert alert-danger alert-dismissible">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -31,6 +31,7 @@
 				 <input class="form-control" type="password" id="password" name="password" placeholder="Şifrə" />
 			</div>
 			<button class="btn btn-success" type="submit">Giriş</button>
+			<a class="btn btn-primary" th:href="@{/create-account}">Hesab yarat</a>
 		</form>
 	</div> 
 </body>
