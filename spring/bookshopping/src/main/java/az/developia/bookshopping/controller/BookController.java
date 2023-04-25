@@ -28,7 +28,8 @@ public class BookController {
 	
 	@GetMapping(path = "/books")
 	public String showBooks(Model model) {
-		List<Book> books = bookDao.findAll();
+		//List<Book> books = bookDao.findAll();
+		List<Book> books = bookDao.findAllByUsername(mySession.getUsername());
 		model.addAttribute("books", books);
 		return "books";
 
