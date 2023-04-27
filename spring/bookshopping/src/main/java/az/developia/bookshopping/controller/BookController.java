@@ -31,6 +31,7 @@ public class BookController {
 		//List<Book> books = bookDao.findAll();
 		List<Book> books = bookDao.findAllByUsername(mySession.getUsername());
 		model.addAttribute("books", books);
+		model.addAttribute("username","İstifadəçi: "+ mySession.getUsername());
 		return "books";
 
 	}

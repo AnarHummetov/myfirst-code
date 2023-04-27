@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <title>Books page</title>
+<style >
+#username{display: inline-block;font-size:20px ; font-weight: bold;}
+</style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -27,6 +30,7 @@
 		<a class="btn btn-success" th:href="@{/books/new}"
 			id="new-book-button">Yeni kitab</a> <a class="btn btn-primary table-striped"
 			th:href="@{/home}">Əsas səhifə</a>
+			<span id="username" th:text="${username}"></span>
 		<hr>
 		<table id="books-table" class="table table-hover table-bordered table-striped">
 			<thead>
