@@ -1,7 +1,5 @@
 package az.developia.bookshopping.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import az.developia.bookshopping.dao.UserDAO;
-import az.developia.bookshopping.model.Book;
 import az.developia.bookshopping.model.User;
 
 @Controller
