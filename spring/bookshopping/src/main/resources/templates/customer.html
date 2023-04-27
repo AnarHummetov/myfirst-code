@@ -27,5 +27,17 @@
 <button id="open-basket-btn" class="btn btn-primary">Səbət <span class="badge badge-light">4</span></button>
 <input id="search-input" class="form-control" placeholder="Axtarış"/>
 </div>
+<script>
+var xht = new XMLHttpRequest();
+xht.onreadystatechange = function(){
+	if(this.readyState == 4 && this.status == 200){
+		var resposeJSON=this.responseText;
+		var booksArray=JSON.parse(resposeJSON)
+		console.log(booksArray);
+	}
+};
+xht.open("GET","/rest/books",true);
+xht.send();
+</script>
 </body>
 </html>
