@@ -12,6 +12,9 @@
 <div th:replace="menu :: menu"></div>
 <div id="main-content" >
  </div>
+ 	<button id='open-basket-btn' class='btn btn-primary'>Səbət
+ <span class='badge badge-light'>0</span></button>
+	<input id='search-input' class='form-control' placeholder='Axtarış'/>
 <script>
 var xht = new XMLHttpRequest();
 xht.onreadystatechange = function(){
@@ -41,11 +44,7 @@ xht.onreadystatechange = function(){
 		"class='add-to-basket-btn btn btn-primary'>Səbətə at</button></div>";
 		mainContentHTML+="</div></div>";
 		}
-		mainContentHTML+="<button id='open-basket-btn' "+
-		"class='btn btn-primary'>Səbət <span class='badge badge-light'"+
-		">10</span></button>";
-		mainContentHTML+="<input id='search-input' class='form-control'"+
-		" placeholder='Axtarış'/>";
+	
 		mainContent.innerHTML=mainContentHTML;	
 		
 		
