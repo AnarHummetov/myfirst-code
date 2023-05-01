@@ -21,11 +21,16 @@
 // JAVASCRIPT BEGIN
 // REFRESH RUN CODES BEGIN
 var xht = new XMLHttpRequest();
+var booksArrayGlobal;
+var basketBooks=[];
 xht.onreadystatechange = function(){
 	if(this.readyState == 4 && this.status == 200){
 		var resposeJSON=this.responseText;
 		var booksArray=JSON.parse(resposeJSON)
 		console.log(booksArray);
+		
+		booksArrayGlobal=booksArray;
+		
 		
 		var mainContent=document.getElementById('main-content');
 		var mainContentHTML="";
@@ -59,7 +64,32 @@ xht.send();
 //REFRESH RUN CODES END
 // FUNCTIONS BEGIN
 function addToBasket(bookId){
-	alert(bookId);
+	//alert(bookId);
+	var bookExistsInBasket=false;
+	 for(var i=0; i<basketBooks.length; i++){
+		 var basketBook=basketBooks[i];
+		 if(basketBook.book.id==bookId){
+			 basketBook.count++;
+			 bookExistsInBasket=true;
+			 break;
+		 }
+	 }
+	 if(bookExistsInBasket){
+		 
+	 }else{
+		 for(var i=0; i<booksArrayGlobal.length; i++){
+	 if(booksArrayGlobal[i].id==bookId){
+		 var basketBook={count:1,book:booksArrayGlobal[i]};
+		 basketBooks.push(basketBook);
+		 break;
+	 }
+ } 
+	 }
+	
+
+
+ alert(JSON.stringify(basketBooks))
+
 }
 // FUNCTIONS END
 //JAVASCRIPT END
