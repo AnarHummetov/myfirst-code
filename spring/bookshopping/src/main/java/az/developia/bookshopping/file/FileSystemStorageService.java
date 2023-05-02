@@ -1,46 +1,68 @@
 package az.developia.bookshopping.file;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class FileSystemStorageService implements StorageService  {
-	
+public class FileSystemStorageService implements StorageService {
+
 	private final Path rootLocation;
+
 	@Autowired
 	public FileSystemStorageService(StorageProperties properties) {
-		this.rootLocation=Paths.get(properties.getLocation());
+		this.rootLocation = Paths.get(properties.getLocation());
 	}
-	
+
 	@Override
 	public void init() {
-		try{
+		try {
 			Files.createDirectories(rootLocation);
-			}
-			catch (IOException e) {
+		} catch (IOException e) {
 			throw new StorageException("Qovluq yaradıla bilmədi", e);
-			}
+		}
 	}
+
 	@Override
 	public String store(MultipartFile file) {
-		return null;
+		String filename = StringUtils.cleanPath(file.getOriginalFilename());
+		String randomFileName = "";
+		try {
+			try (InputStream inputStream = file.getInputStream()) {
+
+				String originalFileName = file.getOriginalFilename();
+				UUID uuid = UUID.randomUUID();
+				randomFileName = originalFileName
+						.replace(originalFileName.substring(0, originalFileName.lastIndexOf(".")), uuid.toString());
+				Files.copy(inputStream, this.rootLocation.resolve(randomFileName), StandardCopyOption.REPLACE_EXISTING);
+			}
+		} catch (IOException e) {
+			throw new StorageException("Fayl yadda saxlana bilmədi: " + filename, e);
+		}
+		return randomFileName;
 	}
+
 	@Override
 	public Path load(String filename) {
 		return null;
 	}
+
 	@Override
 	public Resource loadAsResource(String filename) {
 		return null;
 	}
+
 	@Override
-	public void deleteAll() {	
+	public void deleteAll() {
 	}
 }
