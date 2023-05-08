@@ -10,6 +10,7 @@
 <link th:href="@{/styles/customer.css}" rel="stylesheet" />
 <style>
 .basket-book-image{width: 30px;}
+#total-price{font-size: 20px;}
 </style>
 </head>
 <body>
@@ -46,6 +47,9 @@
 
 </tbody>
 </table>
+
+<span id="total-price"></span>
+
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-danger" data-dismiss="modal">Bağla</button>
@@ -67,6 +71,7 @@ if(basketBooksFromStorage==null){
 var openBasketButton=document.getElementById('open-basket-btn');
 var basketBookCount=document.getElementById('basket-book-count');
 var basketBooksTable=document.getElementById('basket-books-table');
+var totalPrice=document.getElementById('total-price');
 basketBookCount.innerHTML=basketBooks.length;
 xht.onreadystatechange = function(){
 	if(this.readyState == 4 && this.status == 200){
@@ -142,6 +147,24 @@ function addToBasket(bookId){
 }
 
 function openBasket(){
+	fillBasketTable();
+}
+
+function deleteBasketBook(bookId){
+	for(var i=0; i<basketBooks.length; i++){
+		if(basketBooks[i].book.id==bookId){
+			basketBook.splice(i,1);break;
+		}
+	}
+	localStorage.setItem('basketBooks',JSON.stringify(basketBooks));
+	openBasketButton.style.display='none';
+	 basketBookCount.innerHTML=basketBooks.length;
+
+	 setTimeout(function(){openBasketButton.style.display='block';},300);
+	fillBasketTable();
+}
+
+function fillBasketTable(){
 	var basketBooksTableHTML="";
 	 for(var i=0; i<basketBooks.length; i++){
 		 var basketBook=basketBooks[i];
@@ -150,13 +173,43 @@ function openBasket(){
 		 "<img class='basket-book-image' src='/files/"+basketBook.book.image+"' />";
 		 basketBooksTableHTML+="</td><td>"+basketBook.book.name;
 		 basketBooksTableHTML+="</td><td>"+basketBook.book.price;
-		 basketBooksTableHTML+="</td><td>"+basketBook.count;
-		 basketBooksTableHTML+="</td><td>"+(basketBook.book.price*basketBook.count);
-		 basketBooksTableHTML+="</td><td><button class='btn btn-danger'>X</button>";
+		 basketBooksTableHTML+="</td><td><input"+
+		 " oninput='bookCountChange("+basketBook.book.id+",this.value)' type='number' value='"+basketBook.count;
+		 basketBooksTableHTML+="'/></td><td id='book"+basketBook.book.id+"'>"+
+		 (basketBook.book.price*basketBook.count);
+		 basketBooksTableHTML+="</td><td><button onclick='deleteBasketBook("+basketBook.book.id+")'"+
+		 " class='btn btn-danger'>X</button>";
 		 basketBooksTableHTML+="</td></tr>";
 	 }
 	 basketBooksTable.innerHTML=basketBooksTableHTML;
+	calculateTotalPrice();
 }
+
+function bookCountChange(bookId, count){
+	 for(var i=0; i<basketBooks.length; i++){
+		 var basketBook=basketBooks[i];
+		 if(basketBook.book.id==bookId){
+			 basketBook.count=count;
+			 document.getElementById('book'+basketBook.book.id).
+			 innerHTML=(count*basketBook.book.price);
+			 localStorage.setItem('basketBooks',JSON.stringify(basketBooks));
+			 calculateTotalPrice()
+			 break;
+		 }
+	 }
+	 
+}
+
+function calculateTotalPrice(){
+	var totalPriceNumber=0;
+	for(var i=0;i<basketBooks.length;i++){
+		var basketBook=basketBooks[i];
+		totalPriceNumber+=basketBook.count*basketBook.price;
+	}
+	totalPrice.innerHTML='Ümumi qiymət: '+totalPriceNumber+' AZN';
+}
+
+
 // FUNCTIONS END
 //JAVASCRIPT END
 </script>
