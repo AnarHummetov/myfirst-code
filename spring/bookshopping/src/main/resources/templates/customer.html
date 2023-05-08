@@ -9,6 +9,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link th:href="@{/styles/customer.css}" rel="stylesheet" />
 <style>
+.basket-book-image{width: 30px;}
 </style>
 </head>
 <body>
@@ -33,6 +34,7 @@
 <thead>
 <tr>
 <th>ID</th>
+<th>Şəkil</th>
 <th>Ad</th>
 <th>Qiymət</th>
 <th>Miqdar</th>
@@ -81,7 +83,7 @@ xht.onreadystatechange = function(){
 		var book=booksArray[i];
 		mainContentHTML+="<div class='book-container'>";
 		mainContentHTML+="<div class='book'>";
-		mainContentHTML+="<span class='book-image'></span>";
+		mainContentHTML+="<span class='book-image' style='background-image:url(/files/"+book.image+");'></span>";
 		mainContentHTML+="<span class='book-name' title='"+
 		book.name+"'>"+book.name+"</span>";
 		mainContentHTML+="<span class='book-price' title='"+
@@ -144,6 +146,8 @@ function openBasket(){
 	 for(var i=0; i<basketBooks.length; i++){
 		 var basketBook=basketBooks[i];
 		 basketBooksTableHTML+="<tr><td>"+basketBook.book.id;
+		 basketBooksTableHTML+="</td><td>"+
+		 "<img class='basket-book-image' src='/files/"+basketBook.book.image+"' />";
 		 basketBooksTableHTML+="</td><td>"+basketBook.book.name;
 		 basketBooksTableHTML+="</td><td>"+basketBook.book.price;
 		 basketBooksTableHTML+="</td><td>"+basketBook.count;
