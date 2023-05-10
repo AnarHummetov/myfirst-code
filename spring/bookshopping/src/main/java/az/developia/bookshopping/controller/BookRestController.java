@@ -37,4 +37,10 @@ public class BookRestController {
 		return bookDao.findAllSearchAllFields(search.getSearch());
 	}
 	
+	@PostMapping(path = "/search-find-partial")
+	public List<Book> findAllSearchFindPartial(@RequestBody SearchModel search){
+
+		return bookDao.findAllSearchAllFieldsFindPartial(search.getSearch(), search.getBegin(), search.getLength());
+	}
+	
 }
