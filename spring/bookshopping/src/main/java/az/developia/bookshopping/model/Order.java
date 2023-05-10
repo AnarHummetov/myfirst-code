@@ -1,6 +1,7 @@
 package az.developia.bookshopping.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,7 +33,7 @@ private Double totalPrice;
 private Customer customer;
 @OneToMany(cascade = CascadeType.ALL)
 @JoinColumn(name = "order_id")
-private List<BasketBook> basketBook;
+private List<BasketBook> basketBooks;
 private String username;
 public Integer getId() {
 	return id;
@@ -64,11 +65,15 @@ public Customer getCustomer() {
 public void setCustomer(Customer customer) {
 	this.customer = customer;
 }
-public List<BasketBook> getBasketBook() {
-	return basketBook;
+
+public List<BasketBook> getBasketBooks() {
+	if (basketBooks==null) {
+		basketBooks=new ArrayList<BasketBook>();
+	}
+	return basketBooks;
 }
-public void setBasketBook(List<BasketBook> basketBook) {
-	this.basketBook = basketBook;
+public void setBasketBooks(List<BasketBook> basketBooks) {
+	this.basketBooks = basketBooks;
 }
 public String getUsername() {
 	return username;
