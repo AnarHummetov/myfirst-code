@@ -55,7 +55,7 @@ function confirmOrder(){
 			var response =this.responseText;
 			console.log(JSON.parse(response));
 			localStorage.setItem('basketBooks','[]');
-			window.location.href='/customer';
+			window.location.href='/order-confirmation-message';
 		}
 	};
 	xhttp.open("POST", "/rest/orders", true);
