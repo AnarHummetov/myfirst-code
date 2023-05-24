@@ -107,10 +107,12 @@ public class FileRestController {
 	@GetMapping("/download/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
+		
+		FileModel fileModel = fileRepository.findByName(filename);
+		
 		Resource file = loadAsResource(filename);
 		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileModel.getFileName() + "\"")
 				.body(file);
 	}
 	
