@@ -15,58 +15,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.course.exception.MyBadRequestException;
-import az.developia.course.model.Student;
-import az.developia.course.service.StudentService;
+import az.developia.course.model.Admin;
+import az.developia.course.service.AdminService;
 
 @RestController
-@RequestMapping(path = "/students")
+@RequestMapping(path = "/admins")
 @CrossOrigin(origins = "*")
-public class StudentRestController {
-	
+public class AdminRestController {
+
 	@Autowired
-	private StudentService studentService;
-	
+	private AdminService adminService;
+
 	@GetMapping
-	public List<Student> findAll(){
-		return studentService.findAll();
+	public List<Admin> findAll() {
+		return adminService.findAll();
 	}
 
 	@PostMapping(path = "/save")
-	public void save(@RequestBody Student s) {
-		s.setId(null);
-		studentService.save(s);
+	public void save(@RequestBody Admin a) {
+		a.setId(null);
+		adminService.save(a);
 	}
-	
+
 	@PutMapping(path = "/edit")
-	public void update(@RequestBody Student s) {
-		
-		if (s.getId() == null) {
+	public void update(@RequestBody Admin a) {
+		if (a.getId() == null) {
 			throw new MyBadRequestException("id null olmamalıdır");
 		}
-		if(s.getId()==0) {
+		if(a.getId()==0) {
 			throw new MyBadRequestException("id 0 olmamalıdır");
 		}
-		Optional<Student> findedStudent = studentService.findById(s.getId());
-		if(findedStudent.isPresent()) {
-			studentService.save(s);
+		Optional<Admin> findedAdmin = adminService.findById(a.getId());
+		if(findedAdmin.isPresent()) {
+			adminService.save(a);
 		}else {
 			throw new MyBadRequestException("id tapılmadı");
 		}
 		
 	}
-	
-	
-	
+
 	@DeleteMapping(path = "/delete/{id}")
 	public void deleteById(@PathVariable Integer id) {
-		studentService.deleteById(id);
+		adminService.deleteById(id);
 	}
-	
 	
 	@GetMapping(path = "/{id}")
-	public Student findById(@PathVariable Integer id) {
+	public Admin findById(@PathVariable Integer id) {
 
-		return studentService.findById(id).get();
+		return adminService.findById(id).get();
 	}
-	
 }
