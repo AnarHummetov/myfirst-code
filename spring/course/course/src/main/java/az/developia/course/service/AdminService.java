@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import az.developia.course.exception.MyBadRequestException;
 import az.developia.course.model.Admin;
 import az.developia.course.repository.AdminRepository;
 
+@Service
 public class AdminService {
 	
 	@Autowired

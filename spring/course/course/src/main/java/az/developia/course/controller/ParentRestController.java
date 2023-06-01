@@ -19,7 +19,7 @@ import az.developia.course.model.Parent;
 import az.developia.course.service.ParentService;
 
 @RestController
-@RequestMapping(path = "/students")
+@RequestMapping(path = "/parents")
 @CrossOrigin(origins = "*")
 public class ParentRestController {
 

@@ -39,5 +39,8 @@ public class Student {
 	private String applySource;
 	private String notes;
 	private String hobbies;
+	
+	private String username;
+	private String password;
 
 }
