@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.course.exception.MyBadRequestException;
+import az.developia.course.model.AuthorityModel;
 import az.developia.course.model.Teacher;
+import az.developia.course.model.UserModel;
+import az.developia.course.repository.AuthorityRepository;
+import az.developia.course.repository.UserRepository;
 import az.developia.course.service.TeacherService;
 
 @RestController
@@ -27,6 +32,16 @@ public class TeacherRestController {
 	private TeacherService teacherService;
 	
 	
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private AuthorityRepository authorityRepository;
+
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+	
+	
 	@GetMapping
 	public List<Teacher> findAll(){
 		return teacherService.findAll();
@@ -35,7 +50,19 @@ public class TeacherRestController {
 	@PostMapping(path = "/save")
 	public void save(@RequestBody Teacher t) {
 		t.setId(null);
+		
+		UserModel userModel = new UserModel();
+		userModel.setUsername(t.getUsername());
+		userModel.setPassword("{bcrypt}"+encoder.encode(t.getPassword()));
+		userRepository.save(userModel);
+
+		System.out.println(userModel);
 		teacherService.save(t);
+
+		AuthorityModel authorityModel = new AuthorityModel();
+		authorityModel.setUsername(t.getUsername());
+		authorityModel.setAuthority("teacher");
+		authorityRepository.save(authorityModel);
 	}
 	
 	@PutMapping(path = "/edit")
@@ -65,4 +92,6 @@ public class TeacherRestController {
 
 		return teacherService.findById(id).get();
 	}
+	
+
 }
