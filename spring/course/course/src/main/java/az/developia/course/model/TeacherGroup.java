@@ -1,6 +1,5 @@
 package az.developia.course.model;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
