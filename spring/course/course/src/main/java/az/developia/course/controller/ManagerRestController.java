@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.course.exception.MyBadRequestException;
+import az.developia.course.model.AuthorityModel;
 import az.developia.course.model.Manager;
+import az.developia.course.model.UserModel;
+import az.developia.course.repository.AuthorityRepository;
+import az.developia.course.repository.UserRepository;
 import az.developia.course.service.ManagerService;
 
 @RestController
@@ -25,6 +30,15 @@ public class ManagerRestController {
 
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private AuthorityRepository authorityRepository;
+
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 
 	@GetMapping
 	public List<Manager> findAll() {
@@ -32,9 +46,21 @@ public class ManagerRestController {
 	}
 
 	@PostMapping(path = "/save")
-	public void save(@RequestBody Manager m) {
-		m.setId(null);
-		managerService.save(m);
+	public void save(@RequestBody Manager manager) {
+		manager.setId(null);
+		UserModel userModel = new UserModel();
+		userModel.setUsername(manager.getUsername());
+		userModel.setPassword("{bcrypt}"+encoder.encode(manager.getPassword()));
+		userRepository.save(userModel);
+
+		System.out.println(userModel);
+		managerService.save(manager);
+
+		AuthorityModel authorityModel = new AuthorityModel();
+		authorityModel.setUsername(manager.getUsername());
+		authorityModel.setAuthority("manager");
+		authorityRepository.save(authorityModel);
+		
 	}
 
 	@PutMapping(path = "/edit")

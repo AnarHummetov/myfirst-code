@@ -27,5 +27,8 @@ public class Parent {
 	private Date birthday;
 	private String phone;
 	private String email;
+	
+	private String username;
+	private String password; 
 
 }

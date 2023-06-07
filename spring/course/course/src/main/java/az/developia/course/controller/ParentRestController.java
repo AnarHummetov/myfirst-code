@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.course.exception.MyBadRequestException;
+import az.developia.course.model.AuthorityModel;
 import az.developia.course.model.Parent;
+import az.developia.course.model.UserModel;
+import az.developia.course.repository.AuthorityRepository;
+import az.developia.course.repository.UserRepository;
 import az.developia.course.service.ParentService;
 
 @RestController
@@ -25,6 +30,15 @@ public class ParentRestController {
 
 	@Autowired
 	private ParentService parentService;
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private AuthorityRepository authorityRepository;
+
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 
 	@GetMapping
 	public List<Parent> findAll() {
@@ -32,9 +46,22 @@ public class ParentRestController {
 	}
 
 	@PostMapping(path = "/save")
-	public void save(@RequestBody Parent p) {
-		p.setId(null);
-		parentService.save(p);
+	public void save(@RequestBody Parent parent) {
+		parent.setId(null);
+		
+		UserModel userModel = new UserModel();
+		userModel.setUsername(parent.getUsername());
+		userModel.setPassword("{bcrypt}"+encoder.encode(parent.getPassword()));
+		userRepository.save(userModel);
+
+		System.out.println(userModel);
+		parentService.save(parent);
+
+		AuthorityModel authorityModel = new AuthorityModel();
+		authorityModel.setUsername(parent.getUsername());
+		authorityModel.setAuthority("parent");
+		authorityRepository.save(authorityModel);
+		
 	}
 
 	@PutMapping(path = "/edit")
